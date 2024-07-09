@@ -35,12 +35,26 @@ void registrarNuevoProducto(vector<Producto>& productos){
     cout << "Ingrese el nombre del producto a registrar: ";
     cin.ignore();
     getline(cin, nuevoProducto.nombre);
-    cout << "Ingrese el precio del producto: ";
+    cout << "Ingrese el precio del producto($): ";
     cin >> nuevoProducto.precio;
     productos.push_back(nuevoProducto);
     cout << "Producto registrado exitosamente~!" << endl;
     cout << endl;
 }
+
+void listarProductos(const vector<Producto>& productos){
+    if (productos.empty()){
+        cout << "No hay mas productos registrados" << endl;
+    } else {
+        cout << "---Lista de Productos---" << endl;
+        int contador = 1;
+        for (const auto& producto : productos) {
+            cout << contador << ". Nombre: " << producto.nombre << ", Precio: $" << producto.precio << endl;
+            contador++;
+        }
+    }
+}
+
 
 int main(){	
 	vector<Producto> productos;
@@ -68,7 +82,7 @@ int main(){
 			}
 			
 			case 2:{
-			//funcion listarProductos
+			listarProductos(productos);
 			break;
 			}
 		
