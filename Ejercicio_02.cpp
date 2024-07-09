@@ -55,6 +55,26 @@ void listarProductos(const vector<Producto>& productos){
     }
 }
 
+void buscarProductoNombre(const vector<Producto>& productos) {
+    string nombre;
+    cout << "Ingrese el nombre del producto para buscar: ";
+    cin.ignore();
+    getline(cin, nombre);
+
+    bool encontrado = false;
+    for (const auto& producto : productos) {
+        if (producto.nombre == nombre) {
+            cout << "Producto encontrado:" << endl;
+            cout << "Nombre: " << producto.nombre << ", Precio: $" << producto.precio << endl;
+            cout << endl;
+            encontrado = true;
+            break;
+        }
+    if (!encontrado) {
+        cout << "El producto no existe o no se ha encontrado" << endl;
+    }
+    }
+}
 
 int main(){	
 	vector<Producto> productos;
@@ -87,7 +107,7 @@ int main(){
 			}
 		
 			case 3:{
-			//funcion buscarProductoNombre
+			buscarProductoNombre(productos);
 			break;
 			}
 			
