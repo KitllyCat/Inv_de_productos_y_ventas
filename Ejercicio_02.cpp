@@ -15,9 +15,36 @@ Requisitos:
 	S: Salir del programa.
 • El menú debe estar ciclado y permitir volver al menú principal después de cada opción.*/
 #include <iostream>
+#include <vector>
+#include <string>
 using namespace std;
+
+struct Producto {
+    string nombre;
+    float precio;
+};
+struct Venta {
+    int idVenta;
+    string producto;
+    int cantidad;
+    float preciototal;
+};
+
+void registrarNuevoProducto(vector<Producto>& productos){
+    Producto nuevoProducto;
+    cout << "Ingrese el nombre del producto a registrar: ";
+    cin.ignore();
+    getline(cin, nuevoProducto.nombre);
+    cout << "Ingrese el precio del producto: ";
+    cin >> nuevoProducto.precio;
+    productos.push_back(nuevoProducto);
+    cout << "Producto registrado exitosamente~!" << endl;
+    cout << endl;
+}
+
 int main(){	
-	int opcion;	
+	vector<Producto> productos;
+	int opcion;
 	do{
 		cout << "---Inventario de Productos y Ventas---"<<endl;
 		cout << "Seleccione la opcion que desea realizar en el programa:" << endl;
@@ -36,12 +63,12 @@ int main(){
 		switch(opcion){
 			
 			case 1:{
-			//funcion RegistrarNuevoProducto
+			registrarNuevoProducto(productos);
 			break;
 			}
 			
 			case 2:{
-            //funcion listarProductos
+			//funcion listarProductos
 			break;
 			}
 		
