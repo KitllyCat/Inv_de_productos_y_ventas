@@ -48,14 +48,14 @@ void listarProductos(const vector<Producto>& productos){
     } else {
         cout << "---Lista de Productos---" << endl;
         int contador = 1;
-        for (const auto& producto : productos) {
+        for (const auto& producto : productos){
             cout << contador << ". Nombre: " << producto.nombre << ", Precio: $" << producto.precio << endl;
             contador++;
         }
     }
 }
 
-void buscarProductoNombre(const vector<Producto>& productos) {
+void buscarProductoNombre(const vector<Producto>& productos){
     string nombre;
     cout << "Ingrese el nombre del producto para buscar: ";
     cin.ignore();
@@ -94,6 +94,26 @@ void actualizarDatosProducto(vector<Producto>& productos){
 
     if (!encontrado){
         cout << "El producto no existe o no se ha encontrado" << endl;
+    }
+}
+
+void eliminarProducto(vector<Producto>& productos, const string &nombre){
+    int indice = -1;
+    for (int i = 0; i < productos.size(); ++i){
+        if (productos[i].nombre == nombre){
+            indice = i;
+            break;
+        }
+    }
+
+    if (indice != -1){
+        for (int i = indice; i < productos.size() - 1; ++i){
+            productos[i] = productos[i + 1];
+        }
+        productos.pop_back();
+        cout << "El producto ha sido eliminado correctamente~!" << endl;
+    } else{
+        cout << "Producto no encontrado, ingrese correctamente el nombre" << endl;
     }
 }
 
@@ -138,9 +158,13 @@ int main(){
 			}
 			
 			case 5:{
-			//funcion eliminarProducto
-			break;
-			}
+			string nombre;
+        	cout << "Ingrese el nombre del producto que desea eliminar de la lista: ";
+        	cin.ignore();
+            getline(cin, nombre);
+        	eliminarProducto(productos, nombre);
+            break;
+        	}
 			
 			case 6:{
 			//funcion registrarNuevaVenta
