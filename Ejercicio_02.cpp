@@ -17,8 +17,8 @@ Requisitos:
 #include <iostream>
 #include <vector>
 #include <string>
-#include <sstream>
 #include <iomanip>
+#include <algorithm>
 using namespace std;
 
 struct Producto {
@@ -157,6 +157,19 @@ void registrarNuevaVenta(vector<Producto>& productos, vector<Venta>& ventas, int
 
     cout << "Venta registrada satisfactoriamente~! Precio total: $" << precioTotalStr << endl;
 }
+
+void listarVentasRealizadas(const vector<Venta>& ventas){
+    if (ventas.empty()){
+        cout << "No se ha realizado ninguna venta" << endl;
+    } else{
+        cout << "Listado de las ventas realizadas:" << endl;
+        for (const auto& venta : ventas) {
+            cout << "ID Venta: " << venta.idVenta << ", Producto: " << venta.producto
+                 << ", Cantidad: " << venta.cantidad << ", Precio Total: " << venta.preciototal << endl;
+        }
+    }
+}
+
 int main(){	
 	vector<Producto> productos;
 	vector<Venta> ventas;
@@ -214,7 +227,7 @@ int main(){
 			}
 			
 			case 7:{
-			//funcion listarVentasRealizadas
+			listarVentasRealizadas(ventas);
 			break;
 			}
 			
