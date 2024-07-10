@@ -17,6 +17,8 @@ Requisitos:
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 struct Producto {
@@ -117,8 +119,48 @@ void eliminarProducto(vector<Producto>& productos, const string &nombre){
     }
 }
 
+void registrarNuevaVenta(vector<Producto>& productos, vector<Venta>& ventas, int& idVentaContador){
+    if (productos.empty()){
+        cout << "No hay más productos disponibles para la venta" << endl;
+        return;
+    }
+
+    string nombreProducto;
+    int cantidad;
+
+    cout << "Ingrese el nombre del producto a vender: ";
+    cin.ignore();
+    getline(cin, nombreProducto);
+
+    int indice = -1;
+    for (int i = 0; i < productos.size(); ++i){
+        if (productos[i].nombre == nombreProducto){
+            indice = i;
+            break;
+        }
+    }
+    if (indice == -1){
+        cout << "Producto no encontrado, ingrese el nombre correctamente o intente de nuevo" << endl;
+        return;
+    }
+
+    cout << "Ingrese la cantidad a vender: ";
+    cin >> cantidad;
+
+    float precioTotal = productos[indice].precio * cantidad;
+
+    stringstream ss;
+    ss << fixed << setprecision(2) << precioTotal;
+    string precioTotalStr = ss.str();
+
+    ventas.push_back({idVentaContador++, nombreProducto, cantidad, precioTotal});
+
+    cout << "Venta registrada satisfactoriamente~! Precio total: $" << precioTotalStr << endl;
+}
 int main(){	
 	vector<Producto> productos;
+	vector<Venta> ventas;
+    int idVentaContador = 1;
 	int opcion;
 	do{
 		cout << "---Inventario de Productos y Ventas---"<<endl;
@@ -159,15 +201,15 @@ int main(){
 			
 			case 5:{
 			string nombre;
-        	cout << "Ingrese el nombre del producto que desea eliminar de la lista: ";
-        	cin.ignore();
-            getline(cin, nombre);
-        	eliminarProducto(productos, nombre);
-            break;
+			cout << "Ingrese el nombre del producto que desea eliminar de la lista: ";
+			cin.ignore();
+			getline(cin, nombre);
+			eliminarProducto(productos, nombre);
+			break;
         	}
 			
 			case 6:{
-			//funcion registrarNuevaVenta
+			registrarNuevaVenta(productos, ventas, idVentaContador);
 			break;
 			}
 			
