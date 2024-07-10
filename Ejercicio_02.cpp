@@ -164,10 +164,18 @@ void listarVentasRealizadas(const vector<Venta>& ventas){
     } else{
         cout << "Listado de las ventas realizadas:" << endl;
         for (const auto& venta : ventas) {
-            cout << "ID Venta: " << venta.idVenta << ", Producto: " << venta.producto
-                 << ", Cantidad: " << venta.cantidad << ", Precio Total: " << venta.preciototal << endl;
+            cout << "ID Venta: " << venta.idVenta << ", Producto: " << venta.producto <<
+			", Cantidad: "<< venta.cantidad<< ", Precio Total: $" << venta.preciototal << endl;
         }
     }
+}
+
+void calcularTotalVentas(const vector<Venta>& ventas){
+    float total = 0;
+    for (const auto& venta : ventas){
+        total += venta.preciototal;
+    }
+    cout << "El total de todas las ventas realizadas es de: $" << total << endl;
 }
 
 int main(){	
@@ -232,7 +240,7 @@ int main(){
 			}
 			
 			case 8:{
-			//funcion calcularTotalVentas
+			calcularTotalVentas(ventas);
 			break;
 			}
 			
